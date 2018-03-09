@@ -1,0 +1,602 @@
+---
+layout: default
+---
+
+{{ content }}
+<!--
+    Copyright © 2015 Quentin "Sardem FF7" Glidic
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+-->
+    <input id="reset" type="button" value="Reset stored values" />
+
+    <div id="preview">
+    <div id="preview-inside" class="rofi-normal-fg rofi-bg rofi-border">
+        <p class="row rofi-normal-bg">Prompt: input</p>
+        <div id="preview-sep-line" class="rofi-sep"></div>
+        <div id="preview-lines">
+            <p class="row rofi-normal-bg">Normal row</p>
+            <p class="row rofi-normal-altbg">Normal Alt. row</p>
+            <p class="row rofi-normal-hlbg rofi-normal-hlfg">Normal Highlight row</p>
+            <div class="rofi-active-fg">
+                <p class="row rofi-active-bg">Active row</p>
+                <p class="row rofi-active-altbg">Active Alt. row</p>
+                <p class="row rofi-active-hlbg rofi-active-hlfg">Active Highlight row</p>
+            </div>
+            <div class="rofi-urgent-fg">
+                <p class="row rofi-urgent-bg">Urgent row</p>
+                <p class="row rofi-urgent-altbg">Urgent Alt. row</p>
+                <p class="row rofi-urgent-hlbg rofi-urgent-hlfg">Urgent Highlight row</p>
+            </div>
+        </div><div id="preview-sep" class="rofi-sep"></div>
+    </div>
+    </div><div id="generator"><pre id="config"><span>! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+rofi.color-enabled: true</span></pre><p id="command">rofi</p>
+</div>
+    <div id="buttons"></div>
+    <div>
+        <h2>Load an Xresources theme</h2>
+        <form id="xresources-loader">
+            <textarea name="xresources"></textarea>
+            <input type="submit" value="Load Xresources theme">
+        </form>
+    </div>
+
+    <pre  id="rasi">/* RASI Theme */
+
+    </pre>
+
+
+    <script>
+    function attachEvent(el, ev, func) {
+        if (el.addEventListener) {
+            el.addEventListener(ev, func, false);
+        } else if (el.attachEvent) {
+            el.attachEvent('on' + ev, func);
+        }
+    }
+    var rasi_theme_body = "\n\n"+
+        "* {\n"+
+        "    spacing:    2;\n"+
+        "    border-color: @foreground;\n"+
+        "    background-color: transparent;\n"+
+        "}\n"+
+        "#window {\n"+
+        "    border:     1;\n"+
+        "    padding:    5;\n"+
+        "    background-color: @background;\n"+
+        "}\n"+
+        "#mainbox {\n"+
+        "    border:  0;\n"+
+        "    padding: 0;\n"+
+        "}\n"+
+        "#message {\n"+
+        "    border:  1px dash 0px 0px ;\n"+
+        "    padding: 2px 0px 0px ;\n"+
+        "    border-color: @separatorcolor;\n"+
+        "}\n"+
+        "#textbox {\n"+
+        "    text-color: @foreground;\n"+
+        "}\n"+
+        "#listview {\n"+
+        "    border-color: @separatorcolor;\n"+
+        "}\n"+
+        "#listview {\n"+
+        "    fixed-height: 0;\n"+
+        "    border:       2px dash 0px 0px ;\n"+
+        "    padding:      2px 0px 0px ;\n"+
+        "}\n"+
+        "#element {\n"+
+        "    border: 0;\n"+
+        "}\n"+
+        "#element normal.normal {\n"+
+        "    text-color: @normal-foreground;\n"+
+        "    background-color: @normal-background;\n"+
+        "}\n"+
+        "#element normal.urgent {\n"+
+        "    text-color: @urgent-foreground;\n"+
+        "    background-color: @urgent-background;\n"+
+        "}\n"+
+        "#element normal.active {\n"+
+        "    text-color: @active-foreground;\n"+
+        "    background-color: @active-background;\n"+
+        "}\n"+
+        "#element selected.normal {\n"+
+        "    text-color: @selected-normal-foreground;\n"+
+        "    background-color: @selected-normal-background;\n"+
+        "}\n"+
+        "#element selected.urgent {\n"+
+        "    text-color: @selected-urgent-foreground;\n"+
+        "    background-color: @selected-urgent-background;\n"+
+        "}\n"+
+        "#element selected.active {\n"+
+        "    text-color: @selected-active-foreground;\n"+
+        "    background-color: @selected-active-background;\n"+
+        "}\n"+
+        "#element alternate.normal {\n"+
+        "    text-color: @alternate-normal-foreground;\n"+
+        "    background-color: @alternate-normal-background;\n"+
+        "}\n"+
+        "#element alternate.urgent {\n"+
+        "    text-color: @alternate-urgent-foreground;\n"+
+        "    background-color: @alternate-urgent-background;\n"+
+        "}\n"+
+        "#element alternate.active {\n"+
+        "    text-color: @alternate-active-foreground;\n"+
+        "    background-color: @alternate-active-background;\n"+
+        "}\n"+
+        "#scrollbar {\n"+
+        "    border:  0;\n"+
+        "    width: 4px;\n"+
+        "    padding: 0;\n"+
+        "    handle-color: @normal-foreground;\n"+
+        "}\n"+
+        "#sidebar {\n"+
+        "    border:       2px dash 0px 0px ;\n"+
+        "    border-color: @separatorcolor;\n"+
+        "}\n"+
+        "#button selected {\n"+
+        "    background-color: @selected-normal-background;\n"+
+        "    text-color:       @selected-normal-foreground;\n"+
+        "}\n"+
+        "#inputbar, case-indicator, entry, prompt, button {\n"+
+        "    spacing: 0;\n"+
+        "    text-color:      @normal-foreground;\n"+
+        "}\n"+
+        "";
+    var colors = {
+        "window": [
+            {
+                name: "rofi-bg",
+                type: "backgroundColor",
+                def: "#fdf6e3",
+                display: "Background",
+                rasi: "background"
+            },
+            {
+                name: "rofi-border",
+                type: "borderColor",
+                def: "#002b36",
+                display: "Border",
+                rasi: "bordercolor"
+            },
+            {
+                name: "rofi-sep",
+                type: "backgroundColor",
+                def: "#000000",
+                display: "Separator",
+                rasi: "separatorcolor"
+            },
+        ],
+        "normal": [
+            {
+                name: "rofi-normal-bg",
+                type: "backgroundColor",
+                def: "#fdf6e3",
+                display: "Background",
+                rasi: "normal-background"
+            },
+            {
+                name: "rofi-normal-fg",
+                type: "color",
+                def: "#002b36",
+                display: "Foreground",
+                rasi: "normal-foreground"
+            },
+            {
+                name: "rofi-normal-altbg",
+                type: "backgroundColor",
+                def: "#eee8d5",
+                display: "Alternative background",
+                rasi: "alternate-normal-foreground"
+            },
+            {
+                name: "rofi-normal-hlbg",
+                type: "backgroundColor",
+                def: "#586e75",
+                display: "Highlight background",
+                rasi: "selected-normal-background"
+            },
+            {
+                name: "rofi-normal-hlfg",
+                type: "color",
+                def: "#eee8d5",
+                display: "Highlight foreground",
+                rasi: "selected-normal-foreground"
+            },
+        ],
+        "active": [
+            {
+                name: "rofi-active-bg",
+                type: "backgroundColor",
+                def: "#fdf6e3",
+                display: "Background",
+                rasi: "active-background"
+            },
+            {
+                name: "rofi-active-fg",
+                type: "color",
+                def: "#268bd2",
+                display: "Foreground",
+                rasi: "active-foreground"
+            },
+            {
+                name: "rofi-active-altbg",
+                type: "backgroundColor",
+                def: "#eee8d5",
+                display: "Alternative background",
+                rasi: "alternate-active-background"
+            },
+            {
+                name: "rofi-active-hlbg",
+                type: "backgroundColor",
+                def: "#268bd2",
+                display: "Highlight background",
+                rasi: "selected-active-background"
+            },
+            {
+                name: "rofi-active-hlfg",
+                type: "color",
+                def: "#fdf6e3",
+                display: "Highlight foreground",
+                rasi: "selected-active-foreground"
+            },
+        ],
+        "urgent": [
+            {
+                name: "rofi-urgent-bg",
+                type: "backgroundColor",
+                def: "#fdf6e3",
+                display: "Background",
+                rasi: "urgent-background"
+            },
+            {
+                name: "rofi-urgent-fg",
+                type: "color",
+                def: "#dc322f",
+                display: "Foreground",
+                rasi: "urgent-foreground"
+            },
+            {
+                name: "rofi-urgent-altbg",
+                type: "backgroundColor",
+                def: "#eee8d5",
+                display: "Alternative background",
+                rasi: "alternate-urgent-background"
+            },
+            {
+                name: "rofi-urgent-hlbg",
+                type: "backgroundColor",
+                def: "#dc322f",
+                display: "Highlight background",
+                rasi: "selected-urgent-background"
+            },
+            {
+                name: "rofi-urgent-hlfg",
+                type: "color",
+                def: "#fdf6e3",
+                display: "Highlight foreground",
+                rasi: "selected-urgent-foreground"
+            },
+        ],
+    };
+
+    var buttons = document.getElementById('buttons');
+    var preview = document.getElementById('preview');
+    var config = document.getElementById('config');
+    var command = document.getElementById('command');
+    var rasi    = document.getElementById('rasi');
+
+    function get_value(name) {
+        var label = document.getElementById(name);
+        var color = label.firstChild.nextSibling;
+        var alpha = color.nextSibling.value;
+        var value = color.value;
+        var css = color.value;
+        if ( alpha < 0xff )
+        {
+            var col = value.substring(1);
+            css = 'rgba(' + Number('0x' + col.substring(0, 2)) +','+ Number('0x' + col.substring(2, 4)) +','+ Number('0x' + col.substring(4, 6)) +','+ (alpha/0xff)+ ')';
+            value = 'argb:' + Number(alpha).toString(16) + col;
+        }
+        return [ label.getAttribute('class'), value, css ];
+    }
+
+    function set_color(name, do_save) {
+        var r = get_value(name);
+        var style = r[0];
+        var value = r[1];
+        var css = r[2];
+        var elements = preview.getElementsByClassName(name);
+        for(var i=0; i < elements.length; i++){
+            elements[i].style[style] = css;
+        }
+        var config_value = config.getElementsByClassName(name);
+        config_value[0].textContent = value;
+        var command_value = command.getElementsByClassName(name);
+        command_value[0].textContent = value;
+        var rasi_value = rasi.getElementsByClassName(name);
+        rasi_value[0].textContent = css;
+        if ( do_save )
+        {
+            save[name] = value;
+            localStorage.save = JSON.stringify(save);
+        }
+    }
+
+    function set_input_value(name, value) {
+        var label = document.getElementById(name);
+        var color = label.firstChild.nextSibling;
+        var alpha = color.nextSibling;
+        if ( value[0] === '#' )
+        {
+            color.value = value;
+            alpha.value = 0xff;
+        }
+        else if ( value.indexOf('argb:') === 0 )
+        {
+            color.value = '#' + value.substring(7);
+            alpha.value = Number('0x' + value.substring(5, 7));
+        }
+        set_color(name, false);
+    }
+
+    function loadDefaults(ev) {
+        save = {};
+        for ( var name in colors ) {
+            var group = colors[name];
+            for ( var i in group ) {
+                var color = group[i];
+                save[color.name] = color.def;
+                if ( ev !== null ) {
+                    set_input_value(color.name, color.def);
+                }
+            }
+        }
+        localStorage.save = JSON.stringify(save);
+    }
+
+    function loadTheme(theme) {
+        for ( var name in colors ) {
+            if ( ! theme.hasOwnProperty(name) )
+                return;
+        }
+        for ( var name in colors ) {
+            var group = colors[name];
+            for ( var i in group ) {
+                var color = group[i];
+                set_input_value(color.name, theme[name][i]);
+            }
+        }
+    }
+
+    function loadThemeXresources(text) {
+        var theme = {};
+        var lines = text.split('\n');
+        for ( var i in lines ) {
+            var line = lines[i].replace(/\s+/g, '');
+            if ( line.indexOf('rofi.color-') != 0 )
+                continue;
+            var setting = line.substring(11);
+            var c = setting.indexOf(':');
+            if ( c === -1 )
+                continue;
+            theme[setting.substring(0, c)] = setting.substring(c+1).split(',');
+        }
+        loadTheme(theme);
+    }
+
+    var save = localStorage.save;
+    if ( typeof(save) === 'undefined' )
+        loadDefaults(null);
+    else
+        save = JSON.parse(save);
+
+    attachEvent(document.getElementById('reset'), 'click', loadDefaults);
+
+
+    function set_color_input(ev) {
+        set_color(this.name, ev.type === 'change');
+    }
+
+    rasi.appendChild (new Text("\n* {") );
+    for ( var name in colors ) {
+        var ge = document.createElement('div');
+        var title = document.createElement('p');
+        title.setAttribute('class', 'group-name');
+        title.appendChild(new Text(name.toUpperCase()[0] + name.substring(1)));
+        ge.appendChild(title);
+
+
+        config.appendChild(new Text("\nrofi.color-" + name + ": "));
+        command.appendChild(new Text(' -color-' + name + ' "'));
+        buttons.appendChild(ge);
+
+        var group = colors[name];
+        for ( var i in group ) {
+            var color = group[i];
+            var label = document.createElement('label');
+            label.setAttribute('id', color.name);
+            label.setAttribute('class', color.type);
+
+            var rasi_label = document.createElement('label');
+            /** Append type */
+            var str = ("\n\t"+color.rasi+":                       ").substring(0,35);
+            rasi_label.appendChild(new Text(str));
+            rasi.appendChild(rasi_label);
+
+            var text = document.createElement('span');
+            text.appendChild(new Text(color.display));
+            label.appendChild(text);
+
+            var input = document.createElement('input');
+            input.setAttribute('type', 'color');
+            input.setAttribute('name', color.name);
+            label.appendChild(input);
+
+            attachEvent(input, 'input', set_color_input);
+            attachEvent(input, 'change', set_color_input);
+
+            input = document.createElement('input');
+            input.setAttribute('type', 'range');
+            input.setAttribute('min', '0');
+            input.setAttribute('step', '1');
+            input.setAttribute('max', '255');
+            input.setAttribute('name', color.name);
+            label.appendChild(input);
+
+            attachEvent(input, 'input', set_color_input);
+            attachEvent(input, 'change', set_color_input);
+
+
+            ge.appendChild(label);
+
+
+            var config_value = document.createElement('span');
+            config_value.setAttribute('class', color.name);
+            if ( i > 0 )
+                config.appendChild(new Text(', '));
+            config.appendChild(config_value);
+
+            var command_value = document.createElement('span');
+            command_value.setAttribute('class', color.name);
+            if ( i > 0 )
+                command.appendChild(new Text(', '));
+            command.appendChild(command_value);
+
+            var rl = document.createElement('span');
+            rl.setAttribute('class', color.name);
+            rl.appendChild ( new Text(save[color.name])); 
+            rasi_label.appendChild(rl);
+            rasi_label.appendChild(new Text(";"));
+
+            set_input_value(color.name, save[color.name]);
+
+        }
+
+        command.appendChild(new Text('"'));
+    }
+    rasi.appendChild (new Text("\n\talternate-normal-foreground:     @normal-foreground;") );
+    rasi.appendChild (new Text("\n\talternate-urgent-foreground:     @urgent-foreground;") );
+    rasi.appendChild (new Text("\n\talternate-active-foreground:     @active-foreground;") );
+    rasi.appendChild (new Text("\n\tforeground:                      @normal-foreground;") );
+    rasi.appendChild (new Text("\n}") );
+    rasi.appendChild ( new Text(rasi_theme_body));
+
+    function change_background() {
+        preview.style.backgroundColor = this.value;
+    }
+
+    function setImage(ev) {
+        switch ( ev.type ) {
+        case 'click':
+            preview.style.backgroundImage = null;
+            image_name.textContent = '';
+        break;
+        case 'load':
+            preview.style.backgroundImage = "url('" + this.result + "')";
+        break;
+        case 'drop':
+            ev.preventDefault();
+            if ( ev.dataTransfer.files.length == 0 )
+                break;
+            var file = ev.dataTransfer.files[0];
+            var reader = new FileReader();
+            attachEvent(reader, 'load', setImage);
+            reader.readAsDataURL(file);
+            image_name.textContent = file.name;
+        break;
+        case 'change':
+            if ( this.files.length == 0 )
+                break;
+            var file = this.files[0];
+            var reader = new FileReader();
+            attachEvent(reader, 'load', setImage);
+            reader.readAsDataURL(file);
+            image_name.textContent = file.name;
+        break;
+        }
+    }
+
+
+    var window_settings = buttons.firstChild;
+    var title = document.createElement('p');
+    title.setAttribute('class', 'group-name');
+    title.appendChild(new Text('Overall background'));
+    var text = document.createElement('small');
+    text.appendChild(new Text("(Transparency testing only, not in the theme)"));
+    title.appendChild(text);
+    window_settings.appendChild(title);
+
+    var label = document.createElement('label');
+
+    var text = document.createElement('span');
+    text.appendChild(new Text('Color'));
+    label.appendChild(text);
+
+    var input = document.createElement('input');
+    input.setAttribute('type', 'color');
+    input.setAttribute('name', color.name);
+    label.appendChild(input);
+
+    attachEvent(input, 'input', change_background);
+    attachEvent(input, 'change', change_background);
+
+    window_settings.appendChild(label);
+
+    label = document.createElement('label');
+    label.setAttribute('class', 'drop-zone');
+
+    text = document.createElement('span');
+    text.appendChild(new Text('Image'));
+    label.appendChild(text);
+
+    input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    label.appendChild(input);
+
+    attachEvent(input, 'change', setImage);
+
+    input = document.createElement('input');
+    input.setAttribute('type', 'button');
+    input.setAttribute('value', 'Remove');
+    label.appendChild(input);
+
+    attachEvent(input, 'click', setImage);
+
+    attachEvent(label, 'dragover', function (ev) { ev.preventDefault(); });
+    attachEvent(label, 'drop', setImage);
+
+    window_settings.appendChild(label);
+
+    var image_name = document.createElement('p');
+    image_name.setAttribute('class', 'image-name')
+    window_settings.appendChild(image_name);
+
+    attachEvent(preview, 'dragover', function (ev) { ev.preventDefault(); });
+    attachEvent(preview, 'drop', setImage);
+
+    attachEvent(document.getElementById('xresources-loader'), 'submit', function (ev) {
+        ev.preventDefault();
+        loadThemeXresources(this['xresources'].value);
+    });
+
+    </script>
